@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import Calcudoku from "./templates/calcudoku";
 
@@ -12,11 +12,10 @@ export default function PuzzleDisplay({ students }) {
 			headers: { authorization: process.env.REACT_APP_INSTRUCTOR_PW },
 		});
 		const data = await response.json();
-		console.log(data);
 		return [student, data];
 	};
 
-	useEffect(() => {
+	const refresh = useCallback(() => {
 		const activeStudents = students.filter((student) => student.active);
 		(async () => {
 			const data = await Promise.all(
@@ -24,7 +23,7 @@ export default function PuzzleDisplay({ students }) {
 			);
 			setPuzzleData(new Map(data));
 		})();
-	}, [students]);
+	}, [students, setPuzzleData]);
 
 	const renderStudentPuzzle = (student) => {
 		let puzzleComponent;
@@ -46,6 +45,11 @@ export default function PuzzleDisplay({ students }) {
 			</li>
 		);
 	};
+
+	useEffect(() => {
+		const refreshId = setInterval(refresh, 1000);
+		return () => clearInterval(refreshId);
+	}, [refresh]);
 
 	return <ul>{Array.from(puzzleData.keys()).map(renderStudentPuzzle)}</ul>;
 }
