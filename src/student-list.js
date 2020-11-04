@@ -15,7 +15,7 @@ export default function StudentList(props) {
 	};
 	return (
 		<div>
-			<input type="text" placeHolder="Filter" onChange={filter} />
+			<input type="text" placeholder="Filter" onChange={filter} />
 			<RefreshButton {...props} />
 			{displayedStudents.map(renderStudent.bind(null, props))}
 		</div>
