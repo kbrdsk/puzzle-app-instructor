@@ -1,0 +1,79 @@
+@use "sass:color";
+
+$base-dimension: 20em;
+
+@mixin puzzle-container($puzzle-size) {
+	$puzzle-dimension: $base-dimension * $puzzle-size/ 4;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2em;
+	div.grid-container {
+		display: grid;
+		height: $puzzle-dimension;
+		width: $puzzle-dimension;
+		gap: 1px;
+		background-color: black;
+		border: solid 3px;
+		grid-template-columns: repeat($puzzle-size, 1fr);
+		grid-template-rows: repeat($puzzle-size, 1fr);
+
+		div.calcudoku-square {
+			position: relative;
+			background-color: white;
+			box-sizing: border-box;
+			padding: 0.5em;
+			border: solid 2px;
+
+			&.n-up {
+				border-top: none;
+			}
+			&.n-down {
+				border-bottom: none;
+			}
+			&.n-right {
+				border-right: none;
+			}
+			&.n-left {
+				border-left: none;
+			}
+
+			div.cage-indicator {
+				position: absolute;
+				top: 0.2em;
+				left: 0.2em;
+			}
+			input {
+				border: none;
+				box-sizing: border-box;
+				width: 100%;
+				height: 100%;
+				font-size: 2em;
+				text-align: right;
+				cursor: pointer;
+				&::-webkit-inner-spin-button,
+				&::-webkit-outer-spin-button {
+					-webkit-appearance: none;
+					margin: 0;
+				}
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+	}
+}
+
+div.puzzle-container {
+	&[size="4"] {
+		@include puzzle-container(4);
+	}
+
+	&[size="5"] {
+		@include puzzle-container(5);
+	}
+
+	&[size="6"] {
+		@include puzzle-container(6);
+	}
+}
