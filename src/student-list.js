@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function StudentList(props) {
+	const { students } = props;
+	const [displayedStudents, setDisplayedStudents] = useState(students);
+	const filter = (event) => {
+		const query = event.target.value.split(" ");
+		const filteredStudents = students.filter(({ first, last }) =>
+			query.every((pattern) => {
+				const regexp = new RegExp(pattern, "i");
+				return first.match(regexp) || last.match(regexp);
+			})
+		);
+		setDisplayedStudents(filteredStudents);
+	};
 	return (
 		<div>
-			<SearchBar {...props} />
+			<input type="text" placeHolder="Filter" onChange={filter} />
 			<RefreshButton {...props} />
-			{props.students.map(renderStudent.bind(null, props))}
+			{displayedStudents.map(renderStudent.bind(null, props))}
 		</div>
 	);
-}
-
-function SearchBar() {
-	return <div className="search-students">Search Bar</div>;
 }
 
 function RefreshButton({ students, setStudents }) {
