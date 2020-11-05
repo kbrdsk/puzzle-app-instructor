@@ -45,7 +45,6 @@ div.puzzle-container[size="4"] div.grid-container div.calcudoku-square input {
   height: 100%;
   font-size: 2em;
   text-align: right;
-  cursor: pointer;
 }
 div.puzzle-container[size="4"] div.grid-container div.calcudoku-square input::-webkit-inner-spin-button, div.puzzle-container[size="4"] div.grid-container div.calcudoku-square input::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -101,7 +100,6 @@ div.puzzle-container[size="5"] div.grid-container div.calcudoku-square input {
   height: 100%;
   font-size: 2em;
   text-align: right;
-  cursor: pointer;
 }
 div.puzzle-container[size="5"] div.grid-container div.calcudoku-square input::-webkit-inner-spin-button, div.puzzle-container[size="5"] div.grid-container div.calcudoku-square input::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -157,7 +155,6 @@ div.puzzle-container[size="6"] div.grid-container div.calcudoku-square input {
   height: 100%;
   font-size: 2em;
   text-align: right;
-  cursor: pointer;
 }
 div.puzzle-container[size="6"] div.grid-container div.calcudoku-square input::-webkit-inner-spin-button, div.puzzle-container[size="6"] div.grid-container div.calcudoku-square input::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -170,6 +167,32 @@ div.puzzle-container[size="6"] div.grid-container div.calcudoku-square input:foc
 div.app {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  min-height: 95vh;
+  user-select: none;
+}
+div.app ul {
+  list-style: none;
+}
+div.app div.student-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-right: solid 1px;
+  padding: 1em;
+}
+div.app div.student-list-container button.refresh-students {
+  margin: 0.5em 0;
+  cursor: pointer;
+}
+div.app div.student-list-container input[type=checkbox] {
+  cursor: pointer;
+}
+div.app div.student-list-container ul.student-list {
+  color: #333;
+}
+div.app ul.puzzle-display div.student-name {
+  font-size: 1.5em;
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -39,7 +39,7 @@ export default function PuzzleDisplay({ students }) {
 		return (
 			<li key={`${first}_${last}`}>
 				<div className="student-name">
-					{first} {last}
+					{capitalize(first)} {capitalize(last)}
 				</div>
 				{puzzleComponent}
 			</li>
@@ -51,5 +51,13 @@ export default function PuzzleDisplay({ students }) {
 		return () => clearInterval(refreshId);
 	}, [refresh]);
 
-	return <ul>{Array.from(puzzleData.keys()).map(renderStudentPuzzle)}</ul>;
+	return (
+		<ul className="puzzle-display">
+			{Array.from(puzzleData.keys()).map(renderStudentPuzzle)}
+		</ul>
+	);
+}
+
+function capitalize(string) {
+	return string.replace(/^./, (char) => char.toUpperCase());
 }

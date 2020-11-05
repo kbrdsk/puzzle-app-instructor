@@ -14,10 +14,12 @@ export default function StudentList(props) {
 		setDisplayedStudents(filteredStudents);
 	};
 	return (
-		<div>
-			<input type="text" placeholder="Filter" onChange={filter} />
+		<div className="student-list-container">
 			<RefreshButton {...props} />
-			{displayedStudents.map(renderStudent.bind(null, props))}
+			<input type="text" placeholder="Filter" onChange={filter} />
+			<ul className="student-list">
+				{displayedStudents.map(renderStudent.bind(null, props))}
+			</ul>
 		</div>
 	);
 }
@@ -55,7 +57,7 @@ function renderStudent({ students, setStudents }, student) {
 	const { first, last, active } = student;
 	return (
 		<li key={`${first} ${last}`}>
-			{first} {last}{" "}
+			{capitalize(first)} {capitalize(last)}{" "}
 			<input
 				type="checkbox"
 				name="active"
@@ -68,4 +70,8 @@ function renderStudent({ students, setStudents }, student) {
 			/>
 		</li>
 	);
+}
+
+function capitalize(string) {
+	return string.replace(/^./, (char) => char.toUpperCase());
 }
