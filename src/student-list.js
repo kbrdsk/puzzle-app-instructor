@@ -15,7 +15,10 @@ export default function StudentList(props) {
 	};
 	return (
 		<div className="student-list-container">
-			<RefreshButton {...props} />
+			<RefreshButton
+				{...props}
+				setDisplayedStudents={setDisplayedStudents}
+			/>
 			<input type="text" placeholder="Filter" onChange={filter} />
 			<ul className="student-list">
 				{displayedStudents.map(renderStudent.bind(null, props))}
@@ -24,7 +27,7 @@ export default function StudentList(props) {
 	);
 }
 
-function RefreshButton({ students, setStudents }) {
+function RefreshButton({ students, setStudents, setDisplayedStudents }) {
 	const fetchStudentList = async () => {
 		const listurl = `${process.env.REACT_APP_API_URL}/students`;
 		const response = await fetch(listurl, {
@@ -32,15 +35,15 @@ function RefreshButton({ students, setStudents }) {
 		});
 		if (response.ok) {
 			try {
-				const list = await response.json();
-				list.forEach((student) => {
+				let list = (await response.json()).map((student) => {
 					const studentMatch = students.find(
 						({ first, last }) =>
 							first === student.first && last === student.last
 					);
-					student.active = studentMatch ? studentMatch.active : false;
+					return studentMatch || student;
 				});
 				setStudents(list);
+				setDisplayedStudents(list);
 			} catch (error) {
 				console.log(error);
 			}
