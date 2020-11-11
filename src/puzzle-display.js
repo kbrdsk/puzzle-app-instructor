@@ -9,7 +9,7 @@ const puzzleComponents = {
 const fetchDefaults = {
 	activepuzzle: true,
 	puzzleName: "calcudoku",
-	puzzleId: "sample",
+	puzzleId: "4x4beginner1",
 };
 
 export default function PuzzleDisplay(props) {

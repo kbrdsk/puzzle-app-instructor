@@ -10,7 +10,6 @@ function App() {
 	const [students, setStudents] = useState([]);
 	const [puzzleDirectory, setPuzzleDirectory] = useState({
 		calcudoku: [],
-		Test: [],
 	});
 	useEffect(() => {
 		(async () => {
