@@ -75,6 +75,9 @@ export default function PuzzleDisplay(props) {
 	const setStudentFetchInfo = (student, key, value) => {
 		const info = { ...fetchInfo.get(student) };
 		info[key] = value;
+		if(key==="puzzleName"){
+			info.puzzleId = props.puzzleDirectory[value][0];
+		}
 		const newFetchInfo = new Map(fetchInfo);
 		newFetchInfo.set(student, info);
 		setFetchInfo(newFetchInfo);
