@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 
 import Calcudoku from "./templates/calcudoku";
+import Logic from "./templates/logic";
 
 const puzzleComponents = {
 	calcudoku: (data) => <Calcudoku data={data} />,
+      	logic: (data) => <Logic data={data} />,
 };
 
 const fetchDefaults = {
