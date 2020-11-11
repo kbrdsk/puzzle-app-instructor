@@ -25,7 +25,9 @@ function App() {
 							},
 						});
 						if (response.ok) {
-							puzzleDirectory[puzzleName] = await response.json();
+							puzzleDirectory[puzzleName] = (
+								await response.json()
+							).map(({ instance }) => instance);
 						} else {
 							console.log(`Http error: ${response.status}`);
 						}
