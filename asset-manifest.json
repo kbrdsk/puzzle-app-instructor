@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/puzzle-app-instructor/static/css/main.6d153bfa.chunk.css",
-    "main.js": "/puzzle-app-instructor/static/js/main.d463155a.chunk.js",
-    "main.js.map": "/puzzle-app-instructor/static/js/main.d463155a.chunk.js.map",
+    "main.css": "/puzzle-app-instructor/static/css/main.e20330c1.chunk.css",
+    "main.js": "/puzzle-app-instructor/static/js/main.f15d642d.chunk.js",
+    "main.js.map": "/puzzle-app-instructor/static/js/main.f15d642d.chunk.js.map",
     "runtime-main.js": "/puzzle-app-instructor/static/js/runtime-main.c3a04d43.js",
     "runtime-main.js.map": "/puzzle-app-instructor/static/js/runtime-main.c3a04d43.js.map",
-    "static/js/2.16ecf859.chunk.js": "/puzzle-app-instructor/static/js/2.16ecf859.chunk.js",
-    "static/js/2.16ecf859.chunk.js.map": "/puzzle-app-instructor/static/js/2.16ecf859.chunk.js.map",
+    "static/js/2.65289a6a.chunk.js": "/puzzle-app-instructor/static/js/2.65289a6a.chunk.js",
+    "static/js/2.65289a6a.chunk.js.map": "/puzzle-app-instructor/static/js/2.65289a6a.chunk.js.map",
     "index.html": "/puzzle-app-instructor/index.html",
-    "static/css/main.6d153bfa.chunk.css.map": "/puzzle-app-instructor/static/css/main.6d153bfa.chunk.css.map",
-    "static/js/2.16ecf859.chunk.js.LICENSE.txt": "/puzzle-app-instructor/static/js/2.16ecf859.chunk.js.LICENSE.txt"
+    "static/css/main.e20330c1.chunk.css.map": "/puzzle-app-instructor/static/css/main.e20330c1.chunk.css.map",
+    "static/js/2.65289a6a.chunk.js.LICENSE.txt": "/puzzle-app-instructor/static/js/2.65289a6a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c3a04d43.js",
-    "static/js/2.16ecf859.chunk.js",
-    "static/css/main.6d153bfa.chunk.css",
-    "static/js/main.d463155a.chunk.js"
+    "static/js/2.65289a6a.chunk.js",
+    "static/css/main.e20330c1.chunk.css",
+    "static/js/main.f15d642d.chunk.js"
   ]
 }
