@@ -5,7 +5,7 @@ import Logic from "./templates/logic";
 
 const puzzleComponents = {
 	calcudoku: (data) => <Calcudoku data={data} />,
-      	logic: (data) => <Logic data={data} />,
+	logic: (data) => <Logic data={data} />,
 };
 
 const fetchDefaults = {
@@ -54,28 +54,32 @@ export default function PuzzleDisplay(props) {
 		[fetchInfo]
 	);
 
+	const refresh = useCallback(async () => {
+		const dataUpdates = await Promise.all(
+			activeStudents.map(async (student) => {
+				const data = await fetchStudentPuzzleData(student);
+				return [student, data];
+			})
+		);
+		setPuzzleData((oldPuzzleData) => {
+			const newPuzzleData = new Map(oldPuzzleData);
+			dataUpdates.forEach((data) => newPuzzleData.set(...data));
+			return newPuzzleData;
+		});
+		console.log("refreshed");
+	}, [activeStudents, setPuzzleData, fetchStudentPuzzleData]);
+
 	//refresh puzzle data
 	useEffect(() => {
-		(async () => {
-			const dataUpdates = await Promise.all(
-				activeStudents.map(async (student) => {
-					const data = await fetchStudentPuzzleData(student);
-					return [student, data];
-				})
-			);
-			setPuzzleData((oldPuzzleData) => {
-				const newPuzzleData = new Map(oldPuzzleData);
-				dataUpdates.forEach((data) => newPuzzleData.set(...data));
-				return newPuzzleData;
-			});
-			console.log("refreshed");
-		})();
-	}, [activeStudents, setPuzzleData, fetchStudentPuzzleData]);
+		refresh();
+		const refreshInterval = setInterval(refresh, 1000);
+		return () => clearInterval(refreshInterval);
+	}, [refresh]);
 
 	const setStudentFetchInfo = (student, key, value) => {
 		const info = { ...fetchInfo.get(student) };
 		info[key] = value;
-		if(key==="puzzleName"){
+		if (key === "puzzleName") {
 			info.puzzleId = props.puzzleDirectory[value][0];
 		}
 		const newFetchInfo = new Map(fetchInfo);
