@@ -164,9 +164,8 @@ div.puzzle-container[size="6"] div.grid-container div.calcudoku-square input:foc
   outline: none;
 }
 
-div.logic textarea {
-  width: 95%;
-  height: 15em;
+div.logic p.description {
+  color: #888;
 }
 
 div.app {
