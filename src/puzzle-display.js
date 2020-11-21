@@ -152,9 +152,7 @@ export default function PuzzleDisplay(props) {
 					return { puzzleName: key, puzzleId, timestamp };
 				})
 			)
-			.sort(({ timestamp: a }, { timestamp: b }) =>
-				a > b ? -1 : 1
-			);
+			.sort(({ timestamp: a }, { timestamp: b }) => (a > b ? -1 : 1));
 		return (
 			<select
 				name="history-select"
@@ -219,6 +217,16 @@ export default function PuzzleDisplay(props) {
 		);
 	};
 
+	const hasRecentActivity = (student) => {
+		const history = studentHistory.get(student) || {};
+		return Object.keys(history).some((key) =>
+			Object.keys(history[key]).some((instanceKey) => {
+				const { timestamp } = history[key][instanceKey][0];
+				return Date.now() - timestamp < 3000;
+			})
+		);
+	};
+
 	const renderStudentDisplay = (student) => {
 		const { first, last } = student;
 		const puzzleInfo = fetchInfo.get(student);
@@ -228,6 +236,9 @@ export default function PuzzleDisplay(props) {
 				<div className="student-header">
 					<div className="student-name">
 						{capitalize(first)} {capitalize(last)}
+						<span className="activity-indicator">
+							{hasRecentActivity(student) ? null : "Inactive"}
+						</span>
 					</div>
 					<div>
 						Show Active Puzzle:
