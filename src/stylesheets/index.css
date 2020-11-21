@@ -164,6 +164,9 @@ div.puzzle-container[size="6"] div.grid-container div.calcudoku-square input:foc
   outline: none;
 }
 
+div.logic {
+  white-space: pre-wrap;
+}
 div.logic p.description {
   color: #888;
 }
