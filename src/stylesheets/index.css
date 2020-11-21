@@ -198,7 +198,14 @@ div.app div.student-list-container ul.student-list {
 }
 div.app ul.puzzle-display div.student-name {
   font-size: 1.5em;
+}
+div.app ul.puzzle-display div.student-name span.name {
   text-decoration: underline;
+}
+div.app ul.puzzle-display div.student-name span.activity-indicator {
+  margin-left: 0.5em;
+  color: red;
+  font-style: italic;
 }
 
 /*# sourceMappingURL=index.css.map */

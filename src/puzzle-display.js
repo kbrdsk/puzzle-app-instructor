@@ -235,7 +235,9 @@ export default function PuzzleDisplay(props) {
 			<li key={`${first}_${last}`}>
 				<div className="student-header">
 					<div className="student-name">
-						{capitalize(first)} {capitalize(last)}
+						<span className="name">
+							{capitalize(first)} {capitalize(last)}
+						</span>
 						<span className="activity-indicator">
 							{hasRecentActivity(student) ? null : "Inactive"}
 						</span>

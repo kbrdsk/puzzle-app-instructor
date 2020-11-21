@@ -36,7 +36,14 @@ div.app {
 	ul.puzzle-display {
 		div.student-name {
 			font-size: 1.5em;
-			text-decoration: underline;
+			span.name {
+				text-decoration: underline;
+			}
+			span.activity-indicator {
+				margin-left: 0.5em;
+				color: red;
+				font-style: italic;
+			}
 		}
 	}
 }
