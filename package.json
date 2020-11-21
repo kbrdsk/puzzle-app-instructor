@@ -2,7 +2,7 @@
   "name": "instructor-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://kbrdsk.github.io/puzzle-app-instructor",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy:staging": "npm run build:staging; node deploy",
-    "deploy:production": "npm run build:production; node deploy"
+    "deploy:production": "npm run build:production; node deploy production"
   },
   "eslintConfig": {
     "extends": [
