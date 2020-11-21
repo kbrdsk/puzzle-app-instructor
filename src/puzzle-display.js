@@ -222,7 +222,7 @@ export default function PuzzleDisplay(props) {
 		return Object.keys(history).some((key) =>
 			Object.keys(history[key]).some((instanceKey) => {
 				const { timestamp } = history[key][instanceKey][0];
-				return Date.now() - timestamp < 3000;
+				return Date.now() - timestamp < 60000;
 			})
 		);
 	};
