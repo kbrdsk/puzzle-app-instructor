@@ -1,0 +1,68 @@
+@use "variables";
+@use "sass:color";
+
+div.light-puzzle-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	div.light-grid {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		div.grid-row {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			div.light-square {
+				height: 2.5em;
+				width: 2.5em;
+				margin: 0.25em;
+				border-radius: 0.5em;
+				cursor: pointer;
+
+				&.active {
+					background-color: variables.$color10;
+				}
+
+				&.inactive {
+					background-color: #000;
+				}
+			}
+		}
+	}
+
+	div.controller {
+		height: 2em;
+		display: flex;
+		align-items: center;
+		svg.nav-button {
+			fill: color.adjust(variables.$color3, $lightness: -25);
+			cursor: pointer;
+			user-select: none;
+
+			&.jump {
+				height: 1em;
+				width: 1em;
+			}
+			&.step {
+				height: 1.5em;
+				width: 1.5em;
+			}
+
+			@media (hover: hover) {
+				&:hover {
+					fill: color.adjust(variables.$color3, $lightness: 15);
+				}
+			}
+
+			&[isactive="false"] {
+				cursor: default;
+				fill: #ddd;
+			}
+		}
+	}
+}

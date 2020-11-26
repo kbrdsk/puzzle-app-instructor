@@ -11,6 +11,7 @@ function App() {
 	const [puzzleDirectory, setPuzzleDirectory] = useState({
 		calcudoku: [],
 		logic: [],
+		light: [],
 	});
 	useEffect(() => {
 		(async () => {

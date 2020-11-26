@@ -2,10 +2,12 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 
 import Calcudoku from "./templates/calcudoku";
 import Logic from "./templates/logic";
+import Light from "./templates/light";
 
 const puzzleComponents = {
 	calcudoku: (data) => <Calcudoku data={data} />,
 	logic: (data) => <Logic data={data} />,
+	light: (data) => <Light data={data} />,
 };
 
 const fetchDefaults = {
