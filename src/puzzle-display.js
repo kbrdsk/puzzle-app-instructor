@@ -57,6 +57,25 @@ export default function PuzzleDisplay(props) {
 		[fetchInfo]
 	);
 
+	const setCompleted = useCallback(
+		async (student, completed) => {
+			const { first, last } = student;
+			const { puzzleName, puzzleId } = puzzleData.get(student);
+			const url =
+				process.env.REACT_APP_API_URL +
+				`/students/${first}_${last}/${puzzleName}/${puzzleId}/completed`;
+			fetch(url, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					authorization: process.env.REACT_APP_INSTRUCTOR_PW,
+				},
+				body: JSON.stringify({ completed }),
+			});
+		},
+		[puzzleData]
+	);
+
 	const updateHistory = useCallback(
 		async (student) => {
 			const { first, last } = student;
@@ -135,9 +154,25 @@ export default function PuzzleDisplay(props) {
 	};
 
 	const renderStudentPuzzle = (student) => {
-		const { puzzleName, ...data } = puzzleData.get(student) || {};
+		const { puzzleName, completed, ...data } =
+			puzzleData.get(student) || {};
 		const render = puzzleComponents[puzzleName];
-		return render ? render(data) : null;
+		return render ? (
+			<div>
+				<div>
+					Completed:{" "}
+					<span
+						className={`completed-check ${
+							completed ? "complete" : "incomplete"
+						}`}
+						onClick={() => setCompleted(student, !completed)}
+					>
+						{completed ? "\u2713" : "\u25EF"}
+					</span>
+				</div>
+				{render(data)}
+			</div>
+		) : null;
 	};
 
 	const renderHistory = (student) => {
