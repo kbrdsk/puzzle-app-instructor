@@ -35,6 +35,9 @@ div.app {
 	}
 
 	ul.puzzle-display {
+		display: flex;
+		flex-wrap: wrap;
+
 		div.student-name {
 			font-size: 1.5em;
 			span.name {

@@ -256,6 +256,10 @@ div.app div.student-list-container ul.student-list {
   color: #333;
   padding: 0;
 }
+div.app ul.puzzle-display {
+  display: flex;
+  flex-wrap: wrap;
+}
 div.app ul.puzzle-display div.student-name {
   font-size: 1.5em;
 }
