@@ -42,27 +42,31 @@ div.app {
 		li.student-display {
 			max-width: 630px;
 			max-height: 630px;
-			padding: 1em;
+			border-radius: 30px;
+			border-top-right-radius: 0;
+			overflow: hidden;
+			padding: 0 0 0.5em 0.5em;
+			margin: 0.5em;
+			background-color: #f0f6fc;
 			display: grid;
 			grid-template-areas:
 				"header          puzzle-list"
 				"puzzle-display  puzzle-list";
-				grid-template-rows: 70px 1fr; 
+			grid-template-rows: 70px 1fr;
 
 			div.puzzle-select {
 				background-color: #f0f6fc;
 				grid-area: puzzle-list;
 				display: flex;
 				flex-direction: column;
-				ul{
+				ul {
 					padding: 0.4em;
-				li.active {
-					background-color: #999;
+					li.active {
+						background-color: #999;
+					}
 				}
 			}
-			}
 			div.student-header {
-				background-color: #f0f6fc;
 				padding: 0.5em;
 				grid-area: header;
 				display: grid;
@@ -95,6 +99,7 @@ div.app {
 			}
 			div.student-puzzle {
 				background-color: #e9e4fd;
+				border-radius: 0.5em;
 				grid-area: puzzle-display;
 				display: flex;
 				flex-direction: column;

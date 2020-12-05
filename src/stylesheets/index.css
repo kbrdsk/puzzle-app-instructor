@@ -264,7 +264,12 @@ div.app ul.puzzle-display {
 div.app ul.puzzle-display li.student-display {
   max-width: 630px;
   max-height: 630px;
-  padding: 1em;
+  border-radius: 30px;
+  border-top-right-radius: 0;
+  overflow: hidden;
+  padding: 0 0 0.5em 0.5em;
+  margin: 0.5em;
+  background-color: #f0f6fc;
   display: grid;
   grid-template-areas: "header          puzzle-list" "puzzle-display  puzzle-list";
   grid-template-rows: 70px 1fr;
@@ -282,7 +287,6 @@ div.app ul.puzzle-display li.student-display div.puzzle-select ul li.active {
   background-color: #999;
 }
 div.app ul.puzzle-display li.student-display div.student-header {
-  background-color: #f0f6fc;
   padding: 0.5em;
   grid-area: header;
   display: grid;
@@ -313,6 +317,7 @@ div.app ul.puzzle-display li.student-display div.student-header div.show-active 
 }
 div.app ul.puzzle-display li.student-display div.student-puzzle {
   background-color: #e9e4fd;
+  border-radius: 0.5em;
   grid-area: puzzle-display;
   display: flex;
   flex-direction: column;
