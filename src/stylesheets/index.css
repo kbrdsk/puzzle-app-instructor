@@ -318,6 +318,7 @@ div.app ul.puzzle-display li.student-display div.student-header div.show-active 
 div.app ul.puzzle-display li.student-display div.student-puzzle {
   background-color: #e9e4fd;
   border-radius: 0.5em;
+  border-bottom-left-radius: 25px;
   grid-area: puzzle-display;
   display: flex;
   flex-direction: column;
