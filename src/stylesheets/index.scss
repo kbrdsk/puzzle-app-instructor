@@ -10,6 +10,7 @@ div.app {
 
 	ul {
 		list-style: none;
+		padding: 0;
 	}
 
 	div.student-list-container {
@@ -30,23 +31,78 @@ div.app {
 
 		ul.student-list {
 			color: #333;
-			padding: 0;
 		}
 	}
 
 	ul.puzzle-display {
 		display: flex;
 		flex-wrap: wrap;
+		padding: 1em;
 
-		div.student-name {
-			font-size: 1.5em;
-			span.name {
-				text-decoration: underline;
+		li.student-display {
+			max-width: 630px;
+			max-height: 630px;
+			padding: 1em;
+			display: grid;
+			grid-template-areas:
+				"header          puzzle-list"
+				"puzzle-display  puzzle-list";
+				grid-template-rows: 70px 1fr; 
+
+			div.puzzle-select {
+				background-color: #f0f6fc;
+				grid-area: puzzle-list;
+				display: flex;
+				flex-direction: column;
+				ul{
+					padding: 0.4em;
+				li.active {
+					background-color: #999;
+				}
 			}
-			span.activity-indicator {
-				margin-left: 0.5em;
-				color: red;
-				font-style: italic;
+			}
+			div.student-header {
+				background-color: #f0f6fc;
+				padding: 0.5em;
+				grid-area: header;
+				display: grid;
+				grid-template-rows: 1fr 1fr;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas:
+					"student-name  activity-indicator"
+					"history       show-active";
+				div.student-name {
+					font-size: 1.5em;
+					text-decoration: underline;
+					grid-area: student-name;
+				}
+				div.activity-indicator {
+					font-size: 1.5em;
+					color: red;
+					font-style: italic;
+					grid-area: activity-indicator;
+				}
+				select.history-select {
+					align-self: center;
+					justify-self: left;
+					grid-area: history;
+				}
+				div.show-active {
+					align-self: center;
+					grid-area: show-active;
+				}
+			}
+			div.student-puzzle {
+				background-color: #e9e4fd;
+				grid-area: puzzle-display;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding: 0.5em;
+
+				div.completion {
+					align-self: center;
+				}
 			}
 		}
 	}

@@ -196,7 +196,8 @@ export default function PuzzleDisplay(props) {
 		const render = puzzleComponents[puzzleName];
 		return render ? (
 			<div className="student-puzzle">
-				<div>
+				{render(data)}
+				<div className="completion">
 					Completed:{" "}
 					<span
 						className={`completed-check ${
@@ -207,7 +208,6 @@ export default function PuzzleDisplay(props) {
 						{completed ? "\u2713" : "\u25EF"}
 					</span>
 				</div>
-				{render(data)}
 			</div>
 		) : null;
 	};
@@ -255,6 +255,8 @@ export default function PuzzleDisplay(props) {
 	const renderPuzzleSelect = (student) => {
 		const directory = props.puzzleDirectory;
 		const { puzzleName } = fetchInfo.get(student);
+		const displayedData = puzzleData.get(student);
+		const completedList = completedLists.get(student);
 		const ids = puzzleName ? directory[puzzleName] : [];
 		return (
 			<div className="puzzle-select">
@@ -276,12 +278,18 @@ export default function PuzzleDisplay(props) {
 				</select>
 				<ul>
 					{ids.map((id) => {
-						const completed = completedLists.get(student)[id];
+						const completed = completedList
+							? completedLists.get(student)[id]
+							: false;
+						const active = displayedData
+							? displayedData.puzzleId === id
+							: false;
 						return (
 							<li
 								onClick={() =>
 									setStudentFetchInfo(student, "puzzleId", id)
 								}
+								className={active ? "active" : ""}
 							>
 								<span
 									className={`completed-check ${
@@ -298,7 +306,6 @@ export default function PuzzleDisplay(props) {
 						);
 					})}
 				</ul>
-				{renderHistory(student)}
 			</div>
 		);
 	};
@@ -318,17 +325,17 @@ export default function PuzzleDisplay(props) {
 		const puzzleInfo = fetchInfo.get(student);
 		const activepuzzle = puzzleInfo ? puzzleInfo.activepuzzle : null;
 		return (
-			<li key={`${first}_${last}`}>
+			<li key={`${first}_${last}`} className="student-display">
 				<div className="student-header">
 					<div className="student-name">
-						<span className="name">
-							{capitalize(first)} {capitalize(last)}
-						</span>
-						<span className="activity-indicator">
-							{hasRecentActivity(student) ? null : "Inactive"}
-						</span>
+						{capitalize(first)} {capitalize(last)}
 					</div>
-					<div>
+
+					<div className="activity-indicator">
+						{hasRecentActivity(student) ? null : "Inactive"}
+					</div>
+					{renderHistory(student)}
+					<div className="show-active">
 						Show Active Puzzle:
 						<input
 							type="checkbox"
@@ -344,8 +351,8 @@ export default function PuzzleDisplay(props) {
 							}
 						/>
 					</div>
-					{!activepuzzle ? renderPuzzleSelect(student) : null}
 				</div>
+				{renderPuzzleSelect(student)}
 				{renderStudentPuzzle(student)}
 			</li>
 		);
