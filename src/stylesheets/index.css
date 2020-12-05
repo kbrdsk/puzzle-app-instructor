@@ -286,6 +286,7 @@ div.app ul.puzzle-display li.student-display div.student-header {
   padding: 0.5em;
   grid-area: header;
   display: grid;
+  grid-gap: 0.5em;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "student-name  activity-indicator" "history       show-active";
