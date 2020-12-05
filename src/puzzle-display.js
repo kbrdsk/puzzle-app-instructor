@@ -20,6 +20,7 @@ export default function PuzzleDisplay(props) {
 	const [puzzleData, setPuzzleData] = useState(new Map());
 	const [fetchInfo, setFetchInfo] = useState(new Map());
 	const [studentHistory, setStudentHistory] = useState(new Map());
+	const [completedLists, setCompletedLists] = useState(new Map());
 	const activeStudents = useMemo(
 		() => props.students.filter((student) => student.active),
 		[props.students]
@@ -49,6 +50,21 @@ export default function PuzzleDisplay(props) {
 			const url =
 				process.env.REACT_APP_API_URL +
 				`/students/${first}_${last}/${puzzleuri}`;
+			const response = await fetch(url, {
+				headers: { authorization: process.env.REACT_APP_INSTRUCTOR_PW },
+			});
+			return await response.json();
+		},
+		[fetchInfo]
+	);
+
+	const fetchStudentCompletedList = useCallback(
+		async (student) => {
+			const { first, last } = student;
+			const { puzzleName } = fetchInfo.get(student);
+			const url =
+				process.env.REACT_APP_API_URL +
+				`/students/${first}_${last}/${puzzleName}/completed`;
 			const response = await fetch(url, {
 				headers: { authorization: process.env.REACT_APP_INSTRUCTOR_PW },
 			});
@@ -120,20 +136,41 @@ export default function PuzzleDisplay(props) {
 	);
 
 	const refresh = useCallback(async () => {
-		const dataUpdates = await Promise.all(
-			activeStudents.map(async (student) => {
-				updateHistory(student);
-				const data = await fetchStudentPuzzleData(student);
-				return [student, data];
-			})
-		);
+		const [dataUpdates, completionUpdates] = await Promise.all([
+			Promise.all(
+				activeStudents.map(async (student) => {
+					updateHistory(student);
+					const data = await fetchStudentPuzzleData(student);
+					return [student, data];
+				})
+			),
+			Promise.all(
+				activeStudents.map(async (student) => {
+					const list = await fetchStudentCompletedList(student);
+					return [student, list];
+				})
+			),
+		]);
 		setPuzzleData((oldPuzzleData) => {
 			const newPuzzleData = new Map(oldPuzzleData);
 			dataUpdates.forEach((data) => newPuzzleData.set(...data));
 			return newPuzzleData;
 		});
+
+		setCompletedLists((oldCompletedLists) => {
+			const newCompletedLists = new Map(oldCompletedLists);
+			completionUpdates.forEach((data) => newCompletedLists.set(...data));
+			return newCompletedLists;
+		});
 		console.log("refreshed");
-	}, [activeStudents, setPuzzleData, fetchStudentPuzzleData, updateHistory]);
+	}, [
+		activeStudents,
+		setPuzzleData,
+		fetchStudentPuzzleData,
+		updateHistory,
+		setCompletedLists,
+		fetchStudentCompletedList,
+	]);
 
 	//refresh puzzle data
 	useEffect(() => {
@@ -217,7 +254,7 @@ export default function PuzzleDisplay(props) {
 
 	const renderPuzzleSelect = (student) => {
 		const directory = props.puzzleDirectory;
-		const { puzzleName, puzzleId } = fetchInfo.get(student);
+		const { puzzleName } = fetchInfo.get(student);
 		const ids = puzzleName ? directory[puzzleName] : [];
 		return (
 			<div className="puzzle-select">
@@ -237,18 +274,30 @@ export default function PuzzleDisplay(props) {
 						<option value={type}>{type}</option>
 					))}
 				</select>
-				<select
-					name="instance-select"
-					id="instance-select"
-					value={puzzleId}
-					onChange={(e) =>
-						setStudentFetchInfo(student, "puzzleId", e.target.value)
-					}
-				>
-					{ids.map((id) => (
-						<option value={id}>{id}</option>
-					))}
-				</select>
+				<ul>
+					{ids.map((id) => {
+						const completed = completedLists.get(student)[id];
+						return (
+							<li
+								onClick={() =>
+									setStudentFetchInfo(student, "puzzleId", id)
+								}
+							>
+								{id}
+								<span
+									className={`completed-check ${
+										completed ? "complete" : "incomplete"
+									}`}
+									onClick={() =>
+										setCompleted(student, !completed)
+									}
+								>
+									{completed ? "\u2713" : "\u25EF"}
+								</span>
+							</li>
+						);
+					})}
+				</ul>
 				{renderHistory(student)}
 			</div>
 		);
