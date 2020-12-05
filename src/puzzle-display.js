@@ -175,7 +175,7 @@ export default function PuzzleDisplay(props) {
 	//refresh puzzle data
 	useEffect(() => {
 		refresh();
-		const refreshInterval = setInterval(refresh, 1000);
+		const refreshInterval = setInterval(refresh, 2000);
 		return () => clearInterval(refreshInterval);
 	}, [refresh]);
 
@@ -195,7 +195,7 @@ export default function PuzzleDisplay(props) {
 			puzzleData.get(student) || {};
 		const render = puzzleComponents[puzzleName];
 		return render ? (
-			<div>
+			<div className="student-puzzle">
 				<div>
 					Completed:{" "}
 					<span
@@ -283,7 +283,6 @@ export default function PuzzleDisplay(props) {
 									setStudentFetchInfo(student, "puzzleId", id)
 								}
 							>
-								{id}
 								<span
 									className={`completed-check ${
 										completed ? "complete" : "incomplete"
@@ -292,8 +291,9 @@ export default function PuzzleDisplay(props) {
 										setCompleted(student, !completed)
 									}
 								>
-									{completed ? "\u2713" : "\u25EF"}
+									{completed ? "\u2713" : "\u25CB "}
 								</span>
+								{id}
 							</li>
 						);
 					})}
