@@ -231,7 +231,7 @@ div.light-puzzle-container div.controller svg.nav-button[isactive=false] {
 
 div.app {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 220px 1fr;
   min-height: 95vh;
   user-select: none;
 }
