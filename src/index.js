@@ -46,6 +46,15 @@ const puzzleDirectory = {
 	].flatMap((instance) =>
 		Array.from({ length: 5 }, (...[, i]) => `${instance}${i + 1}`)
 	),
+	matchstick: [
+		"fish",
+		"donkey",
+		"squares1",
+		"squares2",
+		"squares3",
+		"squares4",
+		"squares5",
+	],
 };
 
 function App() {

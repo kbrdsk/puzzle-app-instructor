@@ -229,6 +229,11 @@ div.light-puzzle-container div.controller svg.nav-button[isactive=false] {
   fill: #ddd;
 }
 
+canvas.matchstick {
+  height: 300px;
+  width: 300px;
+}
+
 div.app {
   display: grid;
   grid-template-columns: 220px 1fr;
