@@ -2,7 +2,14 @@ import React, { useRef, useEffect, useCallback } from "react";
 
 export default function Matchstick({ data }) {
 	const canvasRef = useRef(null);
-	const { height, width, work, stickWidth } = data;
+	const {
+		height,
+		width,
+		work,
+		stickWidth,
+		description,
+		startingConfiguration,
+	} = data;
 
 	const draw = useCallback(
 		(ctx) => {
@@ -10,6 +17,12 @@ export default function Matchstick({ data }) {
 			ctx.beginPath();
 			ctx.lineWidth = stickWidth;
 			ctx.lineCap = "round";
+			ctx.strokeStyle = "#0b032d22";
+			for (let [initial, terminal] of startingConfiguration) {
+				ctx.moveTo(initial.x, initial.y);
+				ctx.lineTo(terminal.x, terminal.y);
+			}
+			ctx.stroke();
 			for (let [initial, terminal] of work) {
 				ctx.beginPath();
 				ctx.lineWidth = stickWidth;
@@ -19,7 +32,7 @@ export default function Matchstick({ data }) {
 				ctx.stroke();
 			}
 		},
-		[work, height, width, stickWidth]
+		[work, height, width, stickWidth, startingConfiguration]
 	);
 
 	useEffect(() => {
@@ -29,12 +42,15 @@ export default function Matchstick({ data }) {
 	}, [draw]);
 
 	return (
-		<canvas
-			id="mandelbrot-canvas"
-			ref={canvasRef}
-			height={height}
-			width={width}
-			className="matchstick"
-		/>
+		<div>
+			<p>{description}</p>
+			<canvas
+				id="mathcstick-canvas"
+				ref={canvasRef}
+				height={height}
+				width={width}
+				className="matchstick"
+			/>
+		</div>
 	);
 }
