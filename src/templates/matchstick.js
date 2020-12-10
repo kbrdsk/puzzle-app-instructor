@@ -42,14 +42,13 @@ export default function Matchstick({ data }) {
 	}, [draw]);
 
 	return (
-		<div>
+		<div className="matchstick">
 			<p>{description}</p>
 			<canvas
 				id="mathcstick-canvas"
 				ref={canvasRef}
 				height={height}
 				width={width}
-				className="matchstick"
 			/>
 		</div>
 	);

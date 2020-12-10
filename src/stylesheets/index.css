@@ -229,7 +229,10 @@ div.light-puzzle-container div.controller svg.nav-button[isactive=false] {
   fill: #ddd;
 }
 
-canvas.matchstick {
+div.matchstick p {
+  width: 300px;
+}
+div.matchstick canvas {
   height: 300px;
   width: 300px;
 }
