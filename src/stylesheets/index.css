@@ -237,6 +237,11 @@ div.matchstick canvas {
   width: 300px;
 }
 
+div.tangram canvas {
+  height: 300px;
+  width: 400px;
+}
+
 div.app {
   display: grid;
   grid-template-columns: 220px 1fr;

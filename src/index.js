@@ -55,6 +55,16 @@ const puzzleDirectory = {
 		"squares4",
 		"squares5",
 	],
+	tangram: [
+		"triangle",
+		"rectangle",
+		"trapezoid",
+		"twotriangles",
+		"twosquares",
+		"cube",
+		"hexagon",
+		"incompleterectangle",
+	],
 };
 
 function App() {
