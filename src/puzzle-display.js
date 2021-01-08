@@ -6,6 +6,8 @@ import Light from "./templates/light";
 import Matchstick from "./templates/matchstick";
 import Tangram from "./templates/tangram";
 
+import ClassroomView from "./classroom-view";
+
 const puzzleComponents = {
 	calcudoku: (data) => <Calcudoku data={data} />,
 	logic: (data) => <Logic data={data} />,
@@ -25,6 +27,7 @@ export default function PuzzleDisplay(props) {
 	const [fetchInfo, setFetchInfo] = useState(new Map());
 	const [studentHistory, setStudentHistory] = useState(new Map());
 	const [completedLists, setCompletedLists] = useState(new Map());
+	const [showClassroomView, setShowClassroomView] = useState(false);
 	const activeStudents = useMemo(
 		() => props.students.filter((student) => student.active),
 		[props.students]
@@ -363,9 +366,21 @@ export default function PuzzleDisplay(props) {
 	};
 
 	return (
-		<ul className="puzzle-display">
-			{activeStudents.map(renderStudentDisplay)}
-		</ul>
+		<div>
+			<button onClick={() => setShowClassroomView(!showClassroomView)}>
+				Classroom View
+			</button>
+			{showClassroomView ? (
+				<ClassroomView
+					showStudentNames={false}
+					puzzleData={puzzleData}
+					students={activeStudents}
+				/>
+			) : null}
+			<ul className="puzzle-display">
+				{activeStudents.map(renderStudentDisplay)}
+			</ul>
+		</div>
 	);
 }
 

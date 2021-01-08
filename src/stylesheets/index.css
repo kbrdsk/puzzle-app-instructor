@@ -242,6 +242,13 @@ div.tangram canvas {
   width: 400px;
 }
 
+ul.classroom-view {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+  list-style: none;
+}
+
 div.app {
   display: grid;
   grid-template-columns: 220px 1fr;
