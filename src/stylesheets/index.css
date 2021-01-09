@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
 div.puzzle-container[size="4"] {
   display: flex;
   flex-direction: column;
@@ -243,10 +244,19 @@ div.tangram canvas {
 }
 
 ul.classroom-view {
+  font-family: "Open Sans", sans-serif;
   display: flex;
   flex-wrap: wrap;
   padding: 1em;
   list-style: none;
+}
+ul.classroom-view li {
+  min-width: 300px;
+  min-height: 300px;
+  background-color: #f0f6fc;
+  padding: 0.7em;
+  border-radius: 0.5em;
+  margin: 0.5em;
 }
 
 div.app {
@@ -254,6 +264,8 @@ div.app {
   grid-template-columns: 220px 1fr;
   min-height: 95vh;
   user-select: none;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.8em;
 }
 div.app ul {
   list-style: none;

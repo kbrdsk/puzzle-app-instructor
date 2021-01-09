@@ -11,7 +11,9 @@ const puzzleComponents = {
 	calcudoku: (data) => <Calcudoku data={data} />,
 	logic: (data) => <Logic data={data} />,
 	light: (data) => <Light data={data} />,
-	matchstick: (data) => <Matchstick data={data} />,
+	matchstick: (data) => (
+		<Matchstick data={data} hideDescription={true} hideStartPos={true} />
+	),
 	tangram: (data) => <Tangram data={data} />,
 };
 
@@ -63,7 +65,7 @@ export default function ClassroomView({
 }
 
 function capitalize(string) {
-	return string.replace(/^./, (char) => char.toUpperCase());
+	return string.replace(/(?<=\W|^)./g, (char) => char.toUpperCase());
 }
 
 function copyStyles(sourceDoc, targetDoc) {

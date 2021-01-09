@@ -5,11 +5,15 @@
 @use "tangram";
 @use "classroom-view";
 
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
+
 div.app {
 	display: grid;
 	grid-template-columns: 220px 1fr;
 	min-height: 95vh;
 	user-select: none;
+	font-family: "Open Sans", sans-serif;
+	font-size: 0.8em;
 
 	ul {
 		list-style: none;

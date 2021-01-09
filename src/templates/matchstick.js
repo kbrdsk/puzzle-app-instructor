@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback } from "react";
 
-export default function Matchstick({ data }) {
+export default function Matchstick({ data, hideDescription, hideStartPos }) {
 	const canvasRef = useRef(null);
 	const {
 		height,
@@ -17,12 +17,14 @@ export default function Matchstick({ data }) {
 			ctx.beginPath();
 			ctx.lineWidth = stickWidth;
 			ctx.lineCap = "round";
-			ctx.strokeStyle = "#0b032d22";
-			for (let [initial, terminal] of startingConfiguration) {
-				ctx.moveTo(initial.x, initial.y);
-				ctx.lineTo(terminal.x, terminal.y);
+			if (!hideStartPos) {
+				ctx.strokeStyle = "#0b032d22";
+				for (let [initial, terminal] of startingConfiguration) {
+					ctx.moveTo(initial.x, initial.y);
+					ctx.lineTo(terminal.x, terminal.y);
+				}
+				ctx.stroke();
 			}
-			ctx.stroke();
 			for (let [initial, terminal] of work) {
 				ctx.beginPath();
 				ctx.lineWidth = stickWidth;
@@ -43,7 +45,7 @@ export default function Matchstick({ data }) {
 
 	return (
 		<div className="matchstick">
-			<p>{description}</p>
+			{hideDescription ? null : <p>{description}</p>}
 			<canvas
 				id="mathcstick-canvas"
 				ref={canvasRef}
